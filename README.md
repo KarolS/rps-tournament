@@ -90,3 +90,10 @@ Amongst languages that are **not supported** yet, but I plan to add them in futu
 * In case of Java, the entry point for your program should be main static method in class named Main, in default (null) package.
 
 * In case of Scala, the entry point for your program should be main method in object named Main, in default (null) package.
+
+Disclaimer
+----------
+
+Programs in 1999 and 1999-dummies directories have been copied and adapted from http://webdocs.cs.ualberta.ca/~darse/rsb-ts1.c
+
+See http://webdocs.cs.ualberta.ca/~darse/rsbpc.html for more details.

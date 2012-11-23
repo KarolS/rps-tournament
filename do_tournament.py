@@ -221,5 +221,5 @@ def do_tournament(seed1, seed2, match_length, paths):
 	sorted_names_b = [t[1] for t in reversed(sorted(totals_b))]
 	sorted_names_s = [t[1] for t in reversed(sorted(totals_s))]
 	print_crosstable(sorted_names_b, crosstable_b, total_score_b, 0)
-	print_crosstable(sorted_names_s, crosstable_s, total_score_s, math.sqrt(match_length)*len(player_names))
+	print_crosstable(sorted_names_s, crosstable_s, total_score_s, math.sqrt(match_length))
 
