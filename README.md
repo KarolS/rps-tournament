@@ -67,9 +67,8 @@ Implementing programs: guidelines
 ---------------------------------
 
 * Pick one of the supported languages. 
-I **tested it to work** with C (.c), C++ (.cpp, .cxx), C# (.cs), Haskell (.hs, .lhs), Java (.java), and Python (.py). See "samples" directory. 
-Other languages that **should work** (in the worst case requiring a little configuration on the host's side; I haven't tested them yet) are: Awk (.awk), Bash (.sh), Brainfuck (.bf), Clojure (.clj), D (.d), F# (.fs), Go (.go), Javascript (.js), PHP (.php), Prolog (.pro), Perl (.pl), Ruby (.rb), Scala (.scala), Tcl (.tclsh).
-Amongst languages that are **not supported** yet, but I plan to add them in future, there are: Ada, Agda, Common Lisp, FIM++, Fortan, Objective-C, Octave, Scheme. Adding support should be quite trivial.
+I **tested it to work** with C (.c), C++ (.cpp, .cxx), C# (.cs), Haskell (.hs, .lhs), Java (.java), O'Caml (.ml), Python (.py), and Scheme (.scm). See "samples" directory. 
+Other languages that **should work** (in the worst case requiring a little configuration on the host's side; I haven't tested them yet) are: Ada (.adb), Awk (.awk), Bash (.sh), Brainfuck (.bf), Clojure (.clj), Common Lisp (.lisp), D (.d), F# (.fs), Fortran 90/95 (.f90/.f95), Go (.go), Javascript (.js), PHP (.php), Prolog (.pro), Perl (.pl), Ruby (.rb), Scala (.scala), Tcl (.tclsh).
 
 * Always return the same name, and make it unique. The manager cannot handle two programs with the same names yet.
 

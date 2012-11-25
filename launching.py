@@ -55,8 +55,14 @@ def run_program_file(program_file):
 			f = compiled(D_COMPILER, ext = EXECUTABLE_EXT)
 		elif program_file.endswith(".cpp") or program_file.endswith(".cxx"):
 			f = compiled(CPP_COMPILER, ext = EXECUTABLE_EXT)
+		elif program_file.endswith(".adb"):
+			f = compiled(ADA_COMPILER, ext = EXECUTABLE_EXT)
+		elif program_file.endswith(".f95") or program_file.endswith(".f95"):
+			f = compiled(FORTRAN_COMPILER, ext = EXECUTABLE_EXT)
 		elif program_file.endswith(".hs") or program_file.endswith(".lhs"):
 			f = compiled(HASKELL_COMPILER, ext = EXECUTABLE_EXT)
+		elif program_file.endswith(".ml"):
+			f = compiled(OCAML_COMPILER, launcher=OCAML_LAUNCHER, ext = EXECUTABLE_EXT)
 		elif program_file.endswith(".java"):
 			f = compiled_dir(JAVA_COMPILER, launcher = JAVA_LAUNCHER)
 		elif program_file.endswith(".scala"):
@@ -64,7 +70,7 @@ def run_program_file(program_file):
 		elif program_file.endswith(".cs"):
 			f = compiled(CSHARP_COMPILER, launcher = CSHARP_LAUNCHER, ext = "exe")
 		elif program_file.endswith(".fs"):
-			f = compiled(compiler, launcher, ext)(FSHARP_COMPILER, launcher = FSHARP_LAUNCHER, ext = "exe")
+			f = compiled(FSHARP_COMPILER, launcher = FSHARP_LAUNCHER, ext = "exe")
 		elif program_file.endswith(".js"):
 			f = interpretedd(JS_INTERPRETER)
 		elif program_file.endswith(".php"):
@@ -79,6 +85,10 @@ def run_program_file(program_file):
 			f = interpreted(BF_INTERPRETER)
 		elif program_file.endswith(".clj"):
 			f = interpreted(CLOJURE_INTERPRETER)
+		elif program_file.endswith(".lisp"):
+			f = interpreted(CLISP_INTERPRETER)
+		elif program_file.endswith(".scm"):
+			f = interpreted(SCHEME_INTERPRETER)
 		elif program_file.endswith(".go"):
 			f = interpreted(GO_LAUNCHER)
 		elif program_file.endswith(".tclsh"):
