@@ -1,7 +1,7 @@
 let program_name = "Sample Beat Last O'Caml" ;;
 
-let paper = 2;;
-let scissors = 1;;
+let paper = 1;;
+let scissors = 2;;
 let rock = 0;;
 
 let get_move my_history = function
