@@ -6,12 +6,20 @@ Rock-Paper-Scissors Polyglot Tournament Framework
 To host a tournament between several programs, given their source files, try the following:
 
     $ python tournament.py <list of source files>
+    
+For example:
+
+    $ python samples/sample.cs samples/Main.java samples/beatlast.ml
+
+    $ python fodder/*.c
 
 For list of supported options, try:
 
     $ python tournament.py --help
 
-Tournament Manager will compile files (if needed) and then will host a tournament of rock-paper-scissors between them. Each pair of programs will compete exactly twice.
+Tournament Manager will compile the files (if needed) and then will host a tournament of rock-paper-scissors between them. Each pair of programs will compete exactly twice.
+
+The framework was tested to work on Python 2.6.2, 2.7.1, 2.7.3 and Pypy 1.9. Python 3 is not yet supported (due to different implementation of subprocess library), nor is Shedskin (due to no implementation of threading library, amongst others).
 
 Protocol
 --------
