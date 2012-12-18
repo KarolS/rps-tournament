@@ -2,6 +2,7 @@
 
 from config import *
 import subprocess
+from subprocess import PIPE
 import uuid
 import sys
 
@@ -14,14 +15,14 @@ def interpreted(interpreter):
 def compiled(compiler, launcher = ITSELF, ext = None):
 	def f(program_file):
 		exe = temp_file(ext)
-		subprocess.Popen(format(compiler, program_file, exe), stderr = sys.stderr).wait()
+		subprocess.Popen(format(compiler, program_file, exe), bufsize=0, stderr = sys.stderr).wait()
 		return format(launcher, exe)
 	return f
 def compiled_dir(compiler, launcher = ITSELF, ext = None):
 	def f(program_file):
 		exe = temp_file(ext)
 		subprocess.Popen(format(MKDIR, exe)).wait()
-		subprocess.Popen(format(compiler, program_file, exe), stderr = sys.stderr).wait()
+		subprocess.Popen(format(compiler, program_file, exe), bufsize=0, stderr = sys.stderr).wait()
 		return format(launcher, exe)
 	return f
 def itself(program_file):
@@ -103,4 +104,5 @@ def run_program_file(program_file):
 			f = interpreted(RUBY_INTERPRETER)
 		command = f(program_file)
 		COMPILED_CACHE[program_file] = command
-	return subprocess.Popen(command, stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = sys.stderr)
+	return subprocess.Popen(command, bufsize = 1, 
+		stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = sys.stderr)

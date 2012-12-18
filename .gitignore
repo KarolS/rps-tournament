@@ -1,5 +1,10 @@
 *.py[cod]
 *~
+__pycache__/
+my_good_ones/
+
+*.cmi
+*.cmo
 
 # C extensions
 *.so

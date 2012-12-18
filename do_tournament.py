@@ -27,10 +27,12 @@ class Player():
 		result = [-1]
 		def do_stuff():
 			try:
-				result[0] = int(self.read_from.readline())
+				result[0] = int(str(self.read_from.readline(2)))
 				if result[0] not in [0,1,2]:
+					print("  Unexpected output: "+str(result[0]))
 					result[0] =  -1
-			except:
+			except Exception as e:
+				print(str(e))
 				result[0] = -1
 		th = threading.Thread(target=do_stuff)
 		th.start()
@@ -45,7 +47,12 @@ class Player():
 			return False
 	def kill(self):
 		try:
-			self.process.kill()
+			self.process.stdout.close()
+			self.process.stdin.close()
+		except Exception as e:
+			print (str( e ))
+		try:
+			self.process.terminate()
 		except: pass
 
 ROCK = 0
@@ -58,26 +65,28 @@ def game(path1, path2, length, seed1, seed2):
 	name2 = path2
 	result = 0
 	detailed_result = length
+	p1 = None
+	p2 = None
 	try:
 		p1 = Player(path1)
 		name1 = p1.get_name()
-	except:
-		print ("Failed to run player 1: "+path1)
-		result = 2
+	except Exception as e:
+		print ("Failed to run player 1: "+path1+", reason: "+str(e))
+		result = 2 # P2 wins provided it doesn't crash as well
 	try:
 		p2 = Player(path2)
 		name2 = p2.get_name()
-	except:
-		print ("Failed to run player 2: "+path2)
-		result = (2-result)/2
+	except Exception as e:
+		print ("Failed to run player 2: "+path2+", reason: "+str(e))
+		result = (2-result)/2 # 2->0, because both failed; 0->1, because now P1 wins
 	try:
-		if result == 0:
+		if result == 0 and p1 is not None:
 			print ("Match between "+name1+" and "+name2)
 			p1.notify(seed1)
 			p2.notify(seed2)
 			(result, detailed_result) = game0(name1, name2, p1,p2, length)
 	except Exception as e: 
-		print "  Match failed for unknown reasons: "+str(e)
+		print ("  Match failed for unknown reasons: "+str(e))
 	try:
 		p1.kill()
 	except: pass
@@ -91,7 +100,7 @@ def game0(name1, name2, p1, p2, length):
 	score_for_2 = 0
 	p1.notify(length)
 	p2.notify(length)
-	for i in xrange(length):
+	for i in range(length):
 		m1 = p1.poll()
 		m2 = p2.poll()
 		if m1 < 0: 
@@ -125,14 +134,14 @@ def print_crosstable(sorted_names, crosstable, total_score, still_a_tie = 0):
 	def shorten(n):
 		if len(n)<=3 : return (n+"   ")[0:3]
 		cleaned = n.replace("(","").replace("[","")
-		split = filter(lambda x:x!="", cleaned.split(" "))
+		split = list(filter(lambda x:x!="", cleaned.split(" ")))
 		if len(split) >= 3: 
 			return "".join(x[0] for x in split[0:3])
 		return cleaned[0:3]
 	shortened_names = [shorten(n) for n in sorted_names]
 	name_length = 1+max([len(x) for x in sorted_names])
 	padded_names = [("%"+str(name_length)+"s")%(x) for x in sorted_names]
-	for x in xrange(3):
+	for x in range(3):
 		print (
 			" " * 7
 			+ " " * name_length
@@ -149,7 +158,7 @@ def print_crosstable(sorted_names, crosstable, total_score, still_a_tie = 0):
 			return "-"
 		else:
 			return " "
-	for i in xrange(len(sorted_names)):
+	for i in range(len(sorted_names)):
 		name1 = sorted_names[i]
 		print (
 			"%5d"%(i+1)
